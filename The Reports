@@ -1,0 +1,23 @@
+/*select name,
+grade,
+mark
+from students
+(case 
+when grade >= 8 then order by grade desc 
+else name = 'NULL' and order by grade desc)
+group by name*/
+SELECT 
+    CASE 
+        WHEN GRADES.GRADE >= 8 THEN STUDENTS.NAME
+        ELSE NULL
+    END AS Name,
+    GRADES.GRADE,
+    STUDENTS.MARKS
+FROM 
+    GRADES
+JOIN 
+    STUDENTS ON STUDENTS.MARKS BETWEEN GRADES.MIN_MARK AND GRADES.MAX_MARK
+ORDER BY 
+    GRADES.GRADE DESC,
+    STUDENTS.NAME;
+
